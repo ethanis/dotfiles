@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# first argument is commit message
+m=("-m" \"$1\")
+
+# subsequent arguments are coauthors of commits
+for ((i = 2; i <= $#; i++ )); do
+
+# todo: if @handle, resolve name/email
+# if [ $i = ]
+
+m+=("-m" \"co-authored-by: ${!i}\")
+done
+
+eval "git commit ${m[@]}"
