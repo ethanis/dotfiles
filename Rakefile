@@ -38,21 +38,27 @@ task :install do
 end
 
 def install_homebrew
-  puts `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
+  puts "Installing homebrew"
+  system('/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"', out: STDOUT)
 end
 
 def install_homebrew_utils
-  puts `brew install rbenv`
-  puts `brew install thefuck`
+  puts "Installing rbenv"
+  system('brew install rbenv', out: STDOUT)
+  puts "Installing thefuck"
+  system('brew install thefuck', out: STDOUT)
 end
 
 def install_node
-  puts `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash`
-  puts `nvm install node`
+  puts "Installing nvm"
+  system('curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash', out: STDOUT)
+  puts "Installing node"
+  system('nvm install node', out: STDOUT)
 end
 
 def install_npm_packages
-  puts `npm install -g spaceship-prompt`
+  puts "Installing spaceship-prompt"
+  system('npm install -g spaceship-prompt', out: STDOUT)
 end
 
 def replace_file(file)
