@@ -39,26 +39,31 @@ end
 
 def install_homebrew
   puts "Installing homebrew"
-  system('/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"', out: STDOUT)
+
+  system('/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"', out: STDOUT) unless command_found?("brew")
 end
 
 def install_homebrew_utils
   puts "Installing rbenv"
-  system('brew install rbenv', out: STDOUT)
+  system('brew install rbenv', out: STDOUT) unless command_found?("rbenv")
   puts "Installing thefuck"
-  system('brew install thefuck', out: STDOUT)
+  system('brew install thefuck', out: STDOUT) unless command_found?("thefuck")
 end
 
 def install_node
   puts "Installing nvm"
-  system('curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash', out: STDOUT)
+  system('curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash', out: STDOUT) unless command_found?("nvm")
   puts "Installing node"
-  system('nvm install node', out: STDOUT)
+  system('nvm install node', out: STDOUT) unless command_found?("node")
 end
 
 def install_npm_packages
   puts "Installing spaceship-prompt"
   system('npm install -g spaceship-prompt', out: STDOUT)
+end
+
+def command_found?(command)
+  system("which #{command} > /dev/null 2>&1")
 end
 
 def replace_file(file)

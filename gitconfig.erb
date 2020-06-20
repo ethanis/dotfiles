@@ -1,6 +1,6 @@
 [user]
-	name = <%= print("Your Name: "); STDOUT.flush; STDIN.gets.chomp %>
-	email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
+	name = <%= print("Your name (git): "); STDOUT.flush; STDIN.gets.chomp %>
+	email = <%= print("Your email (git): "); STDOUT.flush; STDIN.gets.chomp %>
 [push]
 	default = simple
 [alias]
@@ -28,3 +28,5 @@
 	helper = osxkeychain
 [diff]
 	algorithm = minimal
+[github]
+	user = <%= print("Your username (github): "); STDOUT.flush; STDIN.gets.chomp %>
