@@ -4,6 +4,8 @@ require 'erb'
 desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
+  install_spaceship_prompt
+
   Dir['*'].each do |file|
     next if %w[Rakefile README.rdoc LICENSE].include? file
     
@@ -30,6 +32,10 @@ task :install do
       link_file(file)
     end
   end
+end
+
+def install_spaceship_prompt
+  puts `npm install -g spaceship-prompt`
 end
 
 def replace_file(file)
