@@ -4,6 +4,7 @@ alias ls="colorls --sd"
 alias l="colorls -lA --sd"
 alias lg="colorls --sd --gs"
 alias ll="colorls -al"
+alias lt="colorls --tree"
 alias la='colorls -A'
 alias ln="ln -v"
 alias mkdir="mkdir -p"
