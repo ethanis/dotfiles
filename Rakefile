@@ -53,13 +53,18 @@ end
 def install_node
   puts "Installing nvm"
   system('curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash', out: STDOUT) unless command_found?("nvm")
+
+  # This probs isnt done in the right process
+  system('chmod +x $HOME/.nvm/nvm.sh')
+  system('$HOME/.nvm/nvm.sh')
+
   puts "Installing node"
   system('nvm install node', out: STDOUT) unless command_found?("node")
 end
 
 def install_npm_packages
   puts "Installing spaceship-prompt"
-  system('npm install -g spaceship-prompt', out: STDOUT)
+  system('npm install -g spaceship-prompt', out: STDOUT) unless command_found?("node")
 end
 
 def command_found?(command)

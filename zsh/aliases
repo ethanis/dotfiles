@@ -51,3 +51,6 @@ alias migrate='rake db:migrate db:test:clone'
 
 # commands starting with % for pasting from web
 alias %=' '
+
+# random
+alias reload='source ~/.zshrc'
