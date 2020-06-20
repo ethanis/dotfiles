@@ -1,0 +1,53 @@
+# unix
+alias ..='cd ..'
+alias ls="ls -F"
+alias l="ls -lAh"
+alias ll="ls -al"
+alias la='ls -A'
+alias ln="ln -v"
+alias mkdir="mkdir -p"
+alias e="$EDITOR"
+
+# Bundler
+alias b="bundle"
+alias be="bundle exec"
+
+# Rails
+alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
+alias s="rspec"
+
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
+
+# Include custom aliases
+if [[ -f ~/.aliases.local ]]; then
+  source ~/.aliases.local
+fi
+
+# git
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
+alias gl='git pull'
+alias gp='git push'
+alias gd='git diff'
+alias gdca='git diff --cached'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gcmsg='git commit -m'
+alias gco='git checkout'
+alias gb='git branch'
+alias gs='git status'
+alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
+alias gf='git fetch'
+alias gfo='git fetch origin'
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+
+# rails
+alias sc='script/console'
+alias ss='script/server'
+alias tlog='tail -f log/development.log'
+alias migrate='rake db:migrate db:test:clone'
+
+# commands starting with % for pasting from web
+alias %=' '

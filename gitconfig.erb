@@ -1,0 +1,30 @@
+[user]
+	name = <%= print("Your Name: "); STDOUT.flush; STDIN.gets.chomp %>
+	email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
+[push]
+	default = simple
+[alias]
+	co = checkout
+	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
+	prune-local = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D #"
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	excludesfile = <%= ENV['HOME'] %>/.gitignore
+	editor = code --new-window --wait
+	autocrlf = input
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[apply]
+	whitespace = nowarn
+[format]
+	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+[credential]
+	helper = osxkeychain
+[diff]
+	algorithm = minimal
