@@ -40,6 +40,12 @@ export NVM_DIR="$HOME/.nvm"
 autoload -U promptinit; promptinit
 prompt spaceship
 
+# enable syntax highlighting
+source /usr/local/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# use colorls for colorizing ls
+source $(dirname $(gem which colorls))/tab_complete.sh
+
 # export path
 export PATH="$HOME/bin:$HOME/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"

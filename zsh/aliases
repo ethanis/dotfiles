@@ -1,9 +1,10 @@
 # unix
 alias ..='cd ..'
-alias ls="ls -F"
-alias l="ls -lAh"
-alias ll="ls -al"
-alias la='ls -A'
+alias ls="colorls --sd"
+alias l="colorls -lA --sd"
+alias lg="colorls --sd --gs"
+alias ll="colorls -al"
+alias la='colorls -A'
 alias ln="ln -v"
 alias mkdir="mkdir -p"
 alias e="$EDITOR"

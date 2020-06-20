@@ -4,10 +4,8 @@ require 'erb'
 desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
-  install_homebrew
-  install_homebrew_utils
-  install_node
-  install_npm_packages
+
+  install_utilities
 
   Dir['*'].each do |file|
     next if %w[Rakefile README.rdoc LICENSE].include? file
@@ -37,6 +35,14 @@ task :install do
   end
 end
 
+def install_utilities
+  install_homebrew
+  install_homebrew_utils
+  install_node
+  install_npm_packages
+  install_gems
+end
+
 def install_homebrew
   puts "Installing homebrew"
 
@@ -45,18 +51,18 @@ end
 
 def install_homebrew_utils
   puts "Installing rbenv"
+
   system('brew install rbenv', out: STDOUT) unless command_found?("rbenv")
   puts "Installing thefuck"
   system('brew install thefuck', out: STDOUT) unless command_found?("thefuck")
+
+  puts "Installing zsh-syntax-highlighting"
+  system('brew install zsh-syntax-highlighting', out: STDOUT) unless File.exist?("/usr/local/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh")
 end
 
 def install_node
   puts "Installing nvm"
-  system('curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash', out: STDOUT) unless command_found?("nvm")
-
-  # This probs isnt done in the right process
-  system('chmod +x $HOME/.nvm/nvm.sh')
-  system('$HOME/.nvm/nvm.sh')
+  system('curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash', out: STDOUT) unless File.exist?("/Users/ethanis/.nvm/nvm.sh")
 
   puts "Installing node"
   system('nvm install node', out: STDOUT) unless command_found?("node")
@@ -65,6 +71,11 @@ end
 def install_npm_packages
   puts "Installing spaceship-prompt"
   system('npm install -g spaceship-prompt', out: STDOUT) unless command_found?("node")
+end
+
+def install_gems
+  puts "Installing colorls"
+  system('gem install colorls', out: STDOUT) unless command_found?("colorls")
 end
 
 def command_found?(command)
