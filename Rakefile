@@ -4,7 +4,10 @@ require 'erb'
 desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
-  install_spaceship_prompt
+  install_homebrew
+  install_homebrew_utils
+  install_node
+  install_npm_packages
 
   Dir['*'].each do |file|
     next if %w[Rakefile README.rdoc LICENSE].include? file
@@ -34,7 +37,21 @@ task :install do
   end
 end
 
-def install_spaceship_prompt
+def install_homebrew
+  puts `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
+end
+
+def install_homebrew_utils
+  puts `brew install rbenv`
+  puts `brew install thefuck`
+end
+
+def install_node
+  puts `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash`
+  puts `nvm install node`
+end
+
+def install_npm_packages
   puts `npm install -g spaceship-prompt`
 end
 
