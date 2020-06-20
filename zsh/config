@@ -56,6 +56,7 @@ source $(dirname $(gem which colorls))/tab_complete.sh
 # export path
 export PATH="$HOME/bin:$HOME/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
 
 fpath=(~/.zsh/functions $fpath)
 

@@ -41,6 +41,7 @@ def install_utilities
   install_node
   install_npm_packages
   install_gems
+  install_dotnet
 end
 
 def install_homebrew
@@ -51,8 +52,8 @@ end
 
 def install_homebrew_utils
   puts "Installing rbenv"
-
   system('brew install rbenv', out: STDOUT) unless command_found?("rbenv")
+
   puts "Installing thefuck"
   system('brew install thefuck', out: STDOUT) unless command_found?("thefuck")
 
@@ -76,6 +77,15 @@ end
 def install_gems
   puts "Installing colorls"
   system('gem install colorls', out: STDOUT) unless command_found?("colorls")
+end
+
+def install_dotnet
+  puts "Installing dotnet dependencies"
+  system("brew install mono-libgdiplus") unless command_found?("dotnet")
+
+  puts "Installing dotnet sdk"
+  # installs LTS by default
+  system('curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin', out: STDOUT) unless command_found?("dotnet")
 end
 
 def command_found?(command)
