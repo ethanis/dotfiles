@@ -1,17 +1,31 @@
 #!/usr/bin/env ruby
 require "net/http"
 require "json"
+require "pry"
 
 message, *co_authors = ARGV
 
 raise ArgumentError, "A commit message is required" if message.nil?
 
+def deep_find(obj,key)
+  if obj.respond_to?(:key?) && obj.key?(key)
+    obj[key]
+  elsif obj.respond_to?(:each)
+    r = nil
+    obj.find{ |*a| r=deep_find(a.last,key) }
+    r
+  end
+end
+
+def first_deep_find(arr, key)
+  arr.each do |e|
+    find = deep_find(e, key)
+    return find unless find.nil?
+  end
+end
+
 def email(handle)
   handle
-
-  def satisfies?(event)
-        
-  end
 
   uri = URI.parse("https://api.github.com/users/#{handle}/events/public")
   Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
@@ -20,10 +34,9 @@ def email(handle)
     response = http.request(request)
     json = JSON.parse(response.body)
 
-    event = json.find { |event| event.keys.include?("payload") && event["payload"].keys.include?("commits") }
-    raise StandardError, "Unable to find public info for user #{handle}" if event.nil?
+    author = first_deep_find(json, "author")
+    raise StandardError, "Unable to find public info for user #{handle}" if author.nil?
 
-    author = event["payload"]["commits"][0]["author"]
     "#{author["name"]} <#{author["email"]}>"
   end
 end
