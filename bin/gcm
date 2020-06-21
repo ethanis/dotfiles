@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+require "net/http"
+require "json"
+
+message, *co_authors = ARGV
+
+raise ArgumentError, "A commit message is required" if message.nil?
+
+def email(handle)
+  handle
+
+  def satisfies?(event)
+        
+  end
+
+  uri = URI.parse("https://api.github.com/users/#{handle}/events/public")
+  Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+    request = Net::HTTP::Get.new(uri)
+    request['accept'] = 'application/json'
+    response = http.request(request)
+    json = JSON.parse(response.body)
+
+    event = json.find { |event| event.keys.include?("payload") && event["payload"].keys.include?("commits") }
+    raise StandardError, "Unable to find public info for user #{handle}" if event.nil?
+
+    author = event["payload"]["commits"][0]["author"]
+    "#{author["name"]} <#{author["email"]}>"
+  end
+end
+
+message += "\n\n" unless co_authors.empty?
+
+co_authors.each do |co_author|
+  if co_author.start_with?("@")
+    message += "co-authored-by: #{email(co_author[1..-1])}\n"
+  else    
+    message += "co-authored-by: #{co_author}\n"
+  end  
+end
+
+system(*["git", "commit", "-m", "#{message}"], out: STDOUT)
