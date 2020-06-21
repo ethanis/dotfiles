@@ -25,8 +25,6 @@ def first_deep_find(arr, key)
 end
 
 def email(handle)
-  handle
-
   uri = URI.parse("https://api.github.com/users/#{handle}/events/public")
   Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
     request = Net::HTTP::Get.new(uri)
@@ -41,14 +39,11 @@ def email(handle)
   end
 end
 
-message += "\n\n" unless co_authors.empty?
-
-co_authors.each do |co_author|
-  if co_author.start_with?("@")
-    message += "co-authored-by: #{email(co_author[1..-1])}\n"
-  else    
-    message += "co-authored-by: #{co_author}\n"
-  end  
+message_parts = [message]
+message_parts << "\n" unless co_authors.empty?
+message_parts << co_authors.map do |co_author|
+  next "co-authored-by: #{email(co_author[1..-1])}" if co_author.start_with?("@")
+  "co-authored-by: #{co_author}"
 end
 
-system(*["git", "commit", "-m", "#{message}"], out: STDOUT)
+system(*["git", "commit", "-m", "#{message_parts.join("\n")}"], out: STDOUT)
