@@ -4,6 +4,8 @@ This sets up my macOS environment as I like. These scripts take heavy inspriatio
 
 ## Installation
 
-git clone git://github.com/ethanis/dotfiles ~/.dotfiles
-cd ~/.dotfiles
-rake install
+```bash
+$ git clone git://github.com/ethanis/dotfiles ~/.dotfiles
+$ cd ~/.dotfiles
+$ rake install
+```
