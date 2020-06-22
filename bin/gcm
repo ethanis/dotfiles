@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require "net/http"
 require "json"
-require "pry"
 
 message, *co_authors = ARGV
 

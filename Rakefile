@@ -58,7 +58,7 @@ def install_homebrew_utils
   system('brew install thefuck', out: STDOUT) unless command_found?("thefuck")
 
   puts "Installing zsh-syntax-highlighting"
-  system('brew install zsh-syntax-highlighting', out: STDOUT) unless File.exist?("/usr/local/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh")
+  system('brew install zsh-syntax-highlighting', out: STDOUT) unless File.exist?("/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh")
 end
 
 def install_node
