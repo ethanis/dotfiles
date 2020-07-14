@@ -13,10 +13,11 @@ alias e="$EDITOR"
 # Bundler
 alias b="bundle"
 alias be="bundle exec"
+alias bi="bundle install"
 
 # Rails
 alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
-alias s="rspec"
+alias s="bin/rspec"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
