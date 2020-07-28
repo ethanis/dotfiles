@@ -18,6 +18,11 @@ alias bi="bundle install"
 # Rails
 alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias s="bin/rspec"
+alias sb="script/bootstrap"
+alias sc="script/console"
+alias server="script/server"
+alias shell="script/shell"
+alias st="script/test"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
