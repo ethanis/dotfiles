@@ -59,6 +59,9 @@ def install_homebrew_utils
 
   puts "Installing zsh-syntax-highlighting"
   system('brew install zsh-syntax-highlighting', out: STDOUT) unless File.exist?("/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh")
+
+  puts "Installing zsh-history-substring-search"
+  system('brew install zsh-history-substring-search', out: STDOUT) unless File.exist?("/usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh")
 end
 
 def install_node

@@ -24,6 +24,9 @@ fi
 # enable syntax highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# enable zsh fuzzy history search
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
 # use colorls for colorizing ls
 source $(dirname $(gem which colorls))/tab_complete.sh
 
@@ -68,6 +71,8 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char 
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 cat << "EOF"
                      .mmMMMMMMMMMMMMMmm.                              
