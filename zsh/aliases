@@ -19,6 +19,8 @@ alias bi="bundle install"
 # Rails
 alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias s="bin/rspec"
+alias sint="bin/rspec --pattern "integration/**/*_spec.rb""
+alias bc="bin/console"
 alias sb="script/bootstrap"
 alias sc="script/console"
 alias server="script/server"
