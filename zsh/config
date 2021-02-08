@@ -86,8 +86,8 @@ cat << "EOF"
        MMMMMMMMMM:                         :MMMMMMMMMM                
       .MMMMMMMMMM                           MMMMMMMMMM.               
       MMMMMMMMM"                             "MMMMMMMMM               
-      MMMMMMMMM                               MMMMMMMMM               
-      MMMMMMMMM                               MMMMMMMMM               
+      MMMMMMMMM          Welcome back,        MMMMMMMMM               
+      MMMMMMMMM            @ethanis           MMMMMMMMM               
       MMMMMMMMMM                             MMMMMMMMMM               
       `MMMMMMMMMM                           MMMMMMMMMM`               
        MMMMMMMMMMMM.                     .MMMMMMMMMMMM                
@@ -98,5 +98,4 @@ cat << "EOF"
               `"MMMMMMMMM           MMMMMMMMM"`                       
                  `"MMMMMM           MMMMMM"`                          
                      `""M           M""`                              
-                          @ethanis
 EOF
