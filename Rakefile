@@ -83,9 +83,6 @@ def install_gems
 end
 
 def install_dotnet
-  puts "Installing dotnet dependencies"
-  system("brew install mono-libgdiplus") unless command_found?("dotnet")
-
   puts "Installing dotnet sdk"
   # installs LTS by default
   system('curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin', out: STDOUT) unless command_found?("dotnet")
