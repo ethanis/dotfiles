@@ -68,3 +68,4 @@ alias %=' '
 # random
 alias reload='source ~/.zshrc'
 alias ssh_key='pbcopy < ~/.ssh/id_rsa.pub'
+alias okta_pass='security find-generic-password -l device_trust '-w' | tr -d "\n" | pbcopy'
