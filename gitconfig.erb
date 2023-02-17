@@ -4,6 +4,7 @@
 	signingkey = <%= print("Signing key: "); STDOUT.flush; STDIN.gets.chomp %>
 [push]
 	default = simple
+	autoSetupRemote = true
 [alias]
 	co = checkout
 	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
