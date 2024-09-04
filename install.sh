@@ -3,6 +3,10 @@ require 'erb'
 
 puts "# Syncing to home folder...\n"
 
+def command_found?(command)
+  system("which #{command} > /dev/null 2>&1")
+end
+
 def link_file file
   if file =~ /.erb$/
     puts "generating ~/.#{file.sub('.erb', '')}"
@@ -23,8 +27,8 @@ end
 def install
   replace_all = false
 
-  Dir['*'].each do |file|
-    next if %w[Readme.md LICENSE install.sh].include? file
+  [*Dir['*'], *Dir['config/*']].each do |file|
+    next if %w[Readme.md LICENSE install.sh config].include? file
 
     if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
@@ -51,6 +55,13 @@ def install
   end
 end
 
+unless command_found?("starship")
+  puts "Installing starship"
+
+  system %Q{sh -c "$(curl -fsSL https://starship.rs/install.sh)"}
+end 
+
+puts "Syncing dotfiles"
 install
 
 puts ""
