@@ -55,10 +55,17 @@ def install
   end
 end
 
-unless command_found?("starship")
+if command_found?("starship")
   puts "Installing starship"
 
-  system %Q{sh -c "$(curl -fsSL https://starship.rs/install.sh)"}
+  # system %Q{sh -c "$(curl -fsSL https://starship.rs/install.sh)"}
+  system "mkdir #{ENV['HOME']}/.config/zsh"
+  # zsh-syntax-highlighting
+  system "git clone --depth 1 'https://github.com/zsh-users/zsh-syntax-highlighting.git' \"#{ENV['HOME']}/.config/zsh/zsh-syntax-highlighting\""
+  # zsh-autosuggestions
+  system "git clone --depth 1 'https://github.com/zsh-users/zsh-autosuggestions.git' \"#{ENV['HOME']}/.config/zsh/zsh-autosuggestions\""
+  # zsh-history-substring-search
+  system "git clone --depth 1 'https://github.com/zsh-users/zsh-history-substring-search.git' \"#{ENV['HOME']}/.config/zsh/zsh-history-substring-search\""
 end 
 
 puts "Syncing dotfiles"
