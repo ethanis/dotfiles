@@ -15,12 +15,17 @@ def link_file file
   end
 end
 
+def replace_file(file)
+  system %Q{rm -rf "$HOME/.#{file.sub('.erb', '')}"}
+  link_file(file)
+end
+
 def install
   replace_all = false
 
   Dir['*'].each do |file|
     next if %w[Readme.md LICENSE install.sh].include? file
-    
+
     if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
         puts "identical ~/.#{file.sub('.erb', '')}"
@@ -46,17 +51,7 @@ def install
   end
 end
 
-
-def link_files
-    Dir['*'].each do |file|
-      next if %w[Rakefile Readme.md LICENSE install.sh].include? file
-
-      link_file file
-    end
-    0
-end
-
-link_files
+install
 
 puts ""
 puts "All done!"
