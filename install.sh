@@ -35,7 +35,7 @@ def install(force:)
         puts "identical ~/.#{file.sub('.erb', '')}"
       elsif replace_all || force
         replace_file(file)
-      else
+      elsif ENV["CODESPACES"].nil?
         print "overwrite ~/.#{file.sub('.erb', '')}? [ynaq] "
         case $stdin.gets.chomp
         when 'a'
