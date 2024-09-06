@@ -9,6 +9,7 @@ end
 
 def link_file file
   if file =~ /.erb$/
+    return if ENV["CODESPACES"]
     puts "generating ~/.#{file.sub('.erb', '')}"
     File.open(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"), 'w') do |new_file|
       new_file.write ERB.new(File.read(file)).result(binding)
@@ -35,7 +36,7 @@ def install(force:)
         puts "identical ~/.#{file.sub('.erb', '')}"
       elsif replace_all || force
         replace_file(file)
-      elsif ENV["CODESPACES"].nil?
+      else
         print "overwrite ~/.#{file.sub('.erb', '')}? [ynaq] "
         case $stdin.gets.chomp
         when 'a'
