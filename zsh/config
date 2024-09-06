@@ -2,17 +2,14 @@
 
 # export default env
 export EDITOR="code --new-window"
-eval "$(rbenv init -)"
-eval "$(thefuck --alias dang)"
 
 # setup nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# use spaceship-prompt
-autoload -U promptinit; promptinit
-prompt spaceship
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(starship init zsh)"
 
 # set prompt to current directory
 if [ $ITERM_SESSION_ID ]; then
@@ -21,20 +18,12 @@ precmd() {
 }
 fi
 
-# enable syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# enable zsh fuzzy history search
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-# use colorls for colorizing ls
-source $(dirname $(gem which colorls))/tab_complete.sh
 
 # export path
-export PATH="$HOME/.tools:$HOME/bin:$HOME/.bin:/usr/local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
-export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
+export PATH="$HOME/.bin:/usr/local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
+# export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+# export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+# export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
 
 fpath=(~/.zsh/functions $fpath)
 
@@ -74,6 +63,7 @@ bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+bindkey '^ ' autosuggest-accept
 
 cat << "EOF"
                      .mmMMMMMMMMMMMMMmm.                              

@@ -1,7 +1,6 @@
 [user]
 	name = <%= print("Name: "); STDOUT.flush; STDIN.gets.chomp %>
 	email = <%= print("Email: "); STDOUT.flush; STDIN.gets.chomp %>
-	signingkey = <%= print("Signing key: "); STDOUT.flush; STDIN.gets.chomp %>
 [push]
 	default = simple
 	autoSetupRemote = true
@@ -13,8 +12,6 @@
 	diff = auto
 	status = auto
 	branch = auto
-[commit]
-	gpgsign = true
 [core]
 	excludesfile = <%= ENV['HOME'] %>/.gitignore
 	editor = code --new-window --wait
