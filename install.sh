@@ -72,5 +72,12 @@ end
 puts "Syncing dotfiles"
 install(force: ARGV.include?("--force") || !ENV["CODESPACES"].nil?)
 
+puts "Sourcing"
+if ENV["SHELL"] == "/bin/zsh"
+  system "source ~/.zshrc"
+else
+  system "source ~/.bashrc"
+end
+
 puts ""
 puts "All done!"
