@@ -59,7 +59,7 @@ end
 unless command_found?("starship")
   puts "Installing starship"
 
-  system %Q{sh -c "$(curl -fsSL https://starship.rs/install.sh)"}
+  system %Q{sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes}
   system "mkdir #{ENV['HOME']}/.config/zsh"
   # zsh-syntax-highlighting
   system "git clone --depth 1 'https://github.com/zsh-users/zsh-syntax-highlighting.git' \"#{ENV['HOME']}/.config/zsh/zsh-syntax-highlighting\""
