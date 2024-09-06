@@ -24,7 +24,7 @@ def replace_file(file)
   link_file(file)
 end
 
-def install
+def install(force:)
   replace_all = false
 
   [*Dir['*'], *Dir['config/*']].each do |file|
@@ -33,7 +33,7 @@ def install
     if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
         puts "identical ~/.#{file.sub('.erb', '')}"
-      elsif replace_all
+      elsif replace_all || force
         replace_file(file)
       else
         print "overwrite ~/.#{file.sub('.erb', '')}? [ynaq] "
@@ -55,7 +55,7 @@ def install
   end
 end
 
-if command_found?("starship")
+unless command_found?("starship")
   puts "Installing starship"
 
   # system %Q{sh -c "$(curl -fsSL https://starship.rs/install.sh)"}
@@ -66,10 +66,10 @@ if command_found?("starship")
   system "git clone --depth 1 'https://github.com/zsh-users/zsh-autosuggestions.git' \"#{ENV['HOME']}/.config/zsh/zsh-autosuggestions\""
   # zsh-history-substring-search
   system "git clone --depth 1 'https://github.com/zsh-users/zsh-history-substring-search.git' \"#{ENV['HOME']}/.config/zsh/zsh-history-substring-search\""
-end 
+end
 
 puts "Syncing dotfiles"
-install
+install(force: ARGV.include?("--force") || !ENV["CODESPACES"].nil?)
 
 puts ""
 puts "All done!"
