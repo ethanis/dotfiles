@@ -1,9 +1,12 @@
 [user]
 	name = <%= print("Name: "); STDOUT.flush; STDIN.gets.chomp %>
 	email = <%= print("Email: "); STDOUT.flush; STDIN.gets.chomp %>
+	signingkey = <%= print("Signing Key: "); STDOUT.flush; STDIN.gets.chomp %>
 [push]
 	default = simple
 	autoSetupRemote = true
+[commit]
+	gpgsign = true
 [alias]
 	co = checkout
 	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
