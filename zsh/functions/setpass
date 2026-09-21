@@ -1,0 +1,1 @@
+read -s "$1?Enter value: " && export "$1"
